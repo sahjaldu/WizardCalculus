@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integrals</title>
+        <link rel="stylesheet" href="https://unpkg.com/normalize.css">
+    <link rel="stylesheet" href="https://unpkg.com/magick.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+        src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <style>
+        header {
+            text-align: center;
+            border: 7px double;
+            padding-bottom: 50px;
+        }
+        header h1 {
+            padding-bottom: 0;
+        }
+        #bar {
+            width: 300px;
+            margin: auto;
+            display: flex;
+            justify-content: space-around;
+            padding-top: 0;
+        }
+        img {
+            display: block;
+            margin: auto;
+            width: 75%;
+        }
+        .theorem {
+            border: 2px solid white;
+            border-radius: 10px;
+            padding: 7px;
+            margin: 20px auto;
+        }
+        .theorem h2 {
+            margin-top: 0;
+            font-size: 2rem;
+            font-family: 'Times New Roman', Times, serif;
+            text-transform: none;
+        }
+        .Mathjax_Display {
+            width: 100%;
+        }
+        @media only screen and (max-width: 500px) {
+            img {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <header>
+            <h1>Integrals</h1>
+            <div id="bar">
+                <a href="derivatives.html"><-- prev</a>
+                <a href="index.html">home</a>
+                <a href="">next --></a>
+            </div>
+        </header>
+        <section>
+            <h2 id="background">Background</h2>
+                <p>Suppose you have a graph that shows someone&#39;s velocity in a certain period of time:</p>
+                
+                <img src="images/integral1.png" alt="the line y=3 from 0 to 10.">
+                
+                <p>
+                    How might we go about finding how far this 
+                    person moved? Well, if they moved at 3 meters 
+                    per second for 10 seconds, then it makes sense 
+                    that they moved 30 meters.
+                </p>
+                <p>Mathematically this looks like:</p>
+                <p>
+                    $$
+                    \begin{align}
+                    &3\mathrm{\frac{m}{s}}\times10\mathrm{s} \\
+                    =\ &3\mathrm{\ m}\times 10 \\
+                    =\ &30\mathrm{m}
+                    \end{align}
+                    $$
+                </p>
+                <p>
+                    What if the person&#39;s velocity 
+                    graph looked like this?
+                </p>
+                
+                <img src="./images/integral2.png" alt="the line y equals 3 frmo 0 to 5, and y equals 4 from 5 to 10.">
+
+                <p>
+                    This person moved at 3 meters per second for 5 
+                    seconds. Then, they moved at 4 meters per 
+                    second for 5 more seconds. So using the same 
+                    method as before, they moved $3(5) + 4(5)=35$ 
+                    meters.
+                </p>
+                <p>
+                    But, in real life people don&#39;t move at 
+                    constant speeds — they speed up and slow down. 
+                    So, what do we do for non-constant graphs? 
+                    (for example, this graph of 
+                    $y=\frac{1}{2}x^2$)
+                </p>
+
+                <img src="images/integral3.png" alt="the line y equals x squared.">
+
+                <h2 id="the-area-under-the-curve">The Area Under The Curve</h2>
+                <p>
+                    Earlier, when we found distance from a 
+                    velocity graph, we can interpret our math as 
+                    finding the area under a curve.
+                </p>
+                <p>
+                    For the first graph, we made a rectangle: 
+                    a height of 3 and a length of 10 gave us 
+                    $3 \times 10=30$.
+                </p>
+                <p>
+                    For the second graph, we used two rectangles. 
+                    One with a height of 3 and length of 5, and 
+                    another with a height of 4 and a length of 5, 
+                    for a total of $3(5) + 4(5)=35$.
+                </p>
+                <p>
+                    Here, for our curved line, we can employ a 
+                    similar strategy. By using a series of 
+                    rectangles, we can approximate the area 
+                    underneath the function.
+                </p>
+                
+                <img src="images/integral4.png" alt="a number of rectangles underneath the curve y equals x squared, with height f of x and some equal length.">
+                
+                <p>
+                    Each rectangle has height $f(x)$. By increasing 
+                    the number of rectangles and reducing the width 
+                    we can get a better approximation:
+                </p>
+                
+                <img src="images/integral5.gif" alt="the rectangles increasing in number and decreasing in size until it appears to conver the area under the function f of x squared perfectly.">
+                
+                <p>
+                    An integral uses this idea and takes it to the 
+                    extreme to get a perfect value. it uses rectangles 
+                    of height $f(x)$ and width $dx$, where $dx$ is 
+                    an infinitely small change in x. Then, it adds 
+                    up all those rectangles together. In mathematical 
+                    form, this looks like:
+                </p>
+                <p>
+                    $$
+                    \int_{x_{1}}^{x_{2}} f(x) \, dx 
+                    $$
+                </p>
+                <p>
+                    $x_{1}$ and $x_{2}$ is the range of the integral, 
+                    the boundaries of where we make and add rectangles.
+                </p>
+                
+                <h2 id="addition">Addition</h2>
+                <p>
+                    Earlier, when describing the process in which we 
+                    would find the area under the curve, I said that 
+                    we would &quot;add&quot; the rectangles of height 
+                    $f(x)$ and &quot;width&quot; $dx$. This is another 
+                    way of understanding the integral: As a continuous 
+                    addition.
+                </p>
+                <p>
+                    Let&#39;s use a physical example. Say we have a 
+                    line of length $L$. We can break down this line 
+                    into infinitely small chunks of size $dl$. So,
+                </p>
+                <p>
+                    $$
+                    L = \int dl
+                    $$
+                </p>
+                <p>
+                    Here, the integral &quot;adds up&quot; all of the 
+                    chucks of size $dl$ to get the total length $L$.
+                </p>
+                <p>
+                    Now another example. What if we wanted to find the 
+                    total mass of some object, say another line? I 
+                    would go about finding the mass by multiplying 
+                    the length of the line $L$ with the density of the 
+                    material $\rho$. But what if the density of the 
+                    object changed throughout the material, say 
+                    according to some function? For example,
+                </p>
+                <p>
+                    $$
+                    \rho(x) = x^{2}
+                    $$
+                </p>
+                <p>
+                    Now the density of the material changes according to what $x$ coordinate you are at. One way to go about <em>approximating</em> 
+                    the total mass is to break the line into parts, then find the mass of each part, 
+                    perhaps by choosing some point in the chunk to represent the density of that chunk. If we 
+                    were to break the line into $n$ parts, then for any $x_{n}$, we choose some random $x_{n}^{*}$ to represent the chunk.
+                </p>
+                
+                <img src="images/integral6.png" alt="a line being broken apart, then a point x i star being chosen from each part.">
+
+                <p>So the mass of some chunk $i$ is approximated by</p>
+                <p>
+                    $$
+                    m \approx \rho(x_{i}^{*}) (x_{i+1}-x_{i})
+                    $$
+                </p>
+                <p>
+                    where $x_{i+1}$ is the beginning of the previous 
+                    chunk (therefore the end of chunk $i$) and $x_{i}$ 
+                    is the beginning of the current chunk. 
+                    So $x_{i+1} - x_{i}$ is the length of chunk 
+                    $i$.
+                </p>
+                <p>
+                    Note how we plugged in $x_{i}^{*}$ into the 
+                    density function. This is what is meant by 
+                    choosing a random point to represent the 
+                    density of the whole chunk.
+                </p>
+                <p>
+                    To approximate the total mass of the line, we must 
+                    sum the mass of each chunk. Here we sum from $i=0$ 
+                    to $i=n$.
+                </p>
+                <p>
+                    $$
+                    M \approx \sum_{i=0}^{n} \rho(x_{i}^{*})(x_{i+1}-x_{i})
+                    $$
+                </p>
+                <p>Or with the density function $\rho(x)=x^{2}$,</p>
+                <p>
+                    $$
+                    M \approx \sum_{i=0}^{n} (x_{i}^{*})^{2} (x_{i+1}-x_{i})
+                    $$
+                </p>
+                <p>
+                    How can we get a better approximation? Well, if we 
+                    choose smaller chunks (therefore a higher quantity of 
+                    chunks in order to still sum up to $L$), we can be more 
+                    precise in how we represent density. Mathematically, 
+                    we do this by increasing $n$, the upper limit of our 
+                    summation. If fact, the more we increase $n$, the better 
+                    our approximation.
+                </p>
+
+                <img src="images/integral7.png" alt="the number of chunks decreasing in size and increasing in number. A point x i star is still chosen from each.">
+                
+                <p>
+                    This idea of approximating and then improving 
+                    that approximation may remind you of the previous 
+                    page (derivatives), where we approximated the slope and then 
+                    improved in until it was instantaneous. The 
+                    breakthrough there was the use of the limit. Here, 
+                    we use the same technique. When we take the limit 
+                    as $n$ goes to infinity, we get a perfect calculation 
+                    of the total mass.
+                </p>
+                <p>
+                    $$
+                    M = \lim_{ n \to \infty } \sum_{i=0}^{n} \rho(x_{i}^{*})(x_{i-1}-x_{i})
+                    $$
+                </p>
+                <p>
+                    This perfect calculation is also known as an 
+                    integral!
+                </p>
+                <p>
+                    $$
+                    \boxed{ M = \lim_{ n \to \infty } \sum_{i=0}^{n} \rho(x_{i}^{*})(x_{i-1}-x_{i}) = \int_{0}^{L} \rho(x)\,dx }
+                    $$
+                </p>
+                <p>
+                    Note that when we have infinite chunks, the length 
+                    of those chunks must be infinitely small to add up 
+                    to $L$. So the length becomes $dx$. Additionally, 
+                    we no longer need to count by $i$, nor take some 
+                    random point of $i$, so that goes away. In the 
+                    example of $\rho(x)=x^{2}$, we have
+                </p>
+                <p>
+                    $$
+                    M = \int_{0}^{L} x^{2}\,dx
+                    $$
+                </p>
+                <p>
+                    Using one of our &quot;Special Rules&quot; (Section below) we can calculate this integral.
+                </p>
+                <p>
+                    $$
+                    M = \int_{0}^{L} x^{2}\,dx = \left. \left( \frac{1}{3}x^{3} \right) \right|_{0}^{L} =\frac{1}{3}L^{3} - \frac{1}{3}(0)^{3} = \boxed{ \frac{1}{3}L^{3} }
+                    $$
+                </p>
+                <p>
+                    It is in this way that an integral can be seen as 
+                    a continuous, as opposed to a discrete, summation. 
+                    Analyzed closely, one would see that viewing the 
+                    integral as &quot;the area under the curve&quot; 
+                    and viewing the integral as the continuous 
+                    summation are really two sides of the same coin. 
+                    In the next section, we will see the third, 
+                    perhaps most fundamental side of this coin (not 
+                    how coins work but whatever), and how the integral 
+                    relates to the derivative.
+                </p>
+                
+                <h2 id="the-fundamental-theorem-of-calculus">The Fundamental Theorem of Calculus</h2>
+                
+                <p>
+                    Apart from being seen as &quot;the area under the 
+                    curve&quot; and the continuous summation, the 
+                    integral is also seen as the inverse of the 
+                    derivative. This is most explicitly seen through 
+                    the <strong>Fundamental Theorem of Calculus</strong>, 
+                    below.
+                </p>
+                <p>
+                    $$
+                    \int_{a}^{b} f'(t)\,dt = f(b)-f(a)
+                    $$
+                </p>
+                <p>
+                    Or in English: the integral from $a$ to $b$ of 
+                    the derivative of $f(t)$, is equal to $f(t)$ 
+                    from $a$ to $b$.
+                </p>
+                <p>
+                    It may be difficult to see how the integral could 
+                    be the inverse of the derivative. How can the 
+                    area under a function be opposite to that of 
+                    slope of a function? However, through analyzing 
+                    the Fundamental Theorem of Calculus, we see that 
+                    it all makes sense.
+                </p>
+                <p>
+                    What does the derivative represent? It represents 
+                    the change in a function at some point.
+                </p>
+                <p>
+                    What does the integral represent? It can be seen 
+                    as a continuous summation of a function over some 
+                    bounds.
+                </p>
+                <p>
+                    So to take the integral of the derivative, you are 
+                    continuously summing the change in a function.
+                </p>
+                
+                <img src="images/integral8.png" alt="the change over points from some function being summed to show the total change.">
+                
+                <p>
+                    I&#39;ve drawn an image to help visualization. The 
+                    function $f(x)$ spans from $x=a$ to $x=b$. The 
+                    change in the green points throughout the function 
+                    is denoted by the blue and red spans, where blue 
+                    is an increase and red is a decrease. By summing 
+                    up the total change, we find that we get the total 
+                    change in the function, $f(b)-f(a)$.
+                </p>
+                <p>
+                    In other words, by taking the integral of the 
+                    derivative, we are summing up all the small 
+                    changes in the function from bounds $a$ to $b$, 
+                    in order to get the total change in the function, 
+                    $f(b)-f(a)$.
+                </p>
+                <p>
+                    By taking the integral of the derivative of a 
+                    function $f$, we get the original function $f$ 
+                    at the bounds.
+                </p>
+                <p>
+                    In this way, the derivative and integral are 
+                    inverses. We further develop this idea in the 
+                    next section.
+                </p>
+
+                <h2 id="the-antiderivative">The Antiderivative</h2>
+
+                <p>
+                    While we have seen that the derivative and 
+                    integral are inverses, when we take the 
+                    integral of the derivative of some function 
+                    $f(x)$, rather than getting $f(x)$ on its own 
+                    we get $f(x)$ at the bounds.
+                </p>
+                <p>
+                    In order to avoid this, we often represent the 
+                    integral without the bounds, like so.
+                </p>
+                <p>
+                    $$
+                    \int f(x)\,dx
+                    $$
+                </p>
+                <p>
+                    This version of integral is called the indefinite 
+                    integral, or the antiderivative. The version with 
+                    bounds is called the definite integral.
+                </p>
+                <p>
+                    The indefinite integral much better captures the 
+                    idea that the integral is the inverse of the 
+                    derivative, since
+                </p>
+                <p>
+                    $$
+                    \int f'(x)\,dx = f(x)+C
+                    $$
+                </p>
+                <p>
+                    But wait, what is this $+\,C$ at the end? This is 
+                    called the integration constant, and is a side 
+                    effect of taking the integral without bounds. We 
+                    no longer get our original function, we get our 
+                    function shifted up and down by some unknown value, 
+                    $C$.
+                </p>
+                <p>
+                    Let&#39;s take an example to see how this constant 
+                    might shown up. In our example, we have,
+                </p>
+                <p>
+                    $$
+                    f(x) = x^{2}+8
+                    $$
+                </p>
+                <p>When we take the derivative of $f(x)$, we get</p>
+                <p>
+                    $$
+                    f'(x)=2x
+                    $$
+                </p>
+                <p>
+                    When we take the antiderivative of $f&#39;(x)$, 
+                    we should get back $f(x)=x^{2}+8$.
+                </p>
+                <p>
+                    $$
+                    \int f'(x)\,dx = \int 2x\,dx = x^{2}
+                    $$
+                </p>
+                <p>
+                    But what&#39;s this? The $+\,8$ at the end of $f(x)$ 
+                    is gone! Since constants go away during the 
+                    derivative process, when we took the antiderivative 
+                    we did not get the 8 back. It is for this reason 
+                    that we add a $+C$ at the end of our 
+                    antiderivatives. So in our example,
+                </p>
+                <p>
+                    $$
+                    \int f'(x)\,dx  =\int 2x\,dx = x^{2}+C
+                    $$
+                </p>
+                <p>
+                    If we knew what are original function was at some 
+                    point, say $f(0)=8$, then we could solve for $C$ 
+                    to find it is 8.
+                </p>
+                <p>
+                    $$
+                    \begin{align}
+                    f(x) & = x^{2}+C \\
+                    f(0) & = 0^{2}+C \\
+                    f(0) & =C &  & \text{but }f(0)=8 \\
+                    8 & = C  &  & \text{we plug in }8\text{ for }C\\
+                    f(x) & = \boxed{ x^{2}+8 }
+                    \end{align}
+                    $$
+                </p>
+                <br>
+                
+                <h2 id="special-rules">Special Rules</h2>
+                
+                <p>
+                    Like with the derivative, we found many special rules 
+                    to compute the integral. Like with the derivative, 
+                    there is an integral power rule,
+                </p>
+                <div class="theorem">
+                    <h2>Power Rule</h2>
+                    <p>$$ \int x^{n}\,dx = \frac{1}{n+1}x^{n+1} +C$$</p>
+                </div>
+                <p>Using the example of $x^{4}$,</p>
+                <p>
+                    $$
+                    \int x^{4}\,dx = \frac{1}{5}x^{5} +C
+                    $$
+                </p>
+                <p>
+                    Notice that taking the derivative of 
+                    $\frac{1}{5}x^{5}+C$ yields $x^{4}$.
+                </p>
+                <p>
+                    There are quite a few more, but they are more 
+                    complicated than what can be discussed here. 
+                    In general, computing the integral is much 
+                    more difficult than finding the derivative. 
+                    In fact, there are a few functions that are 
+                    simply impossible to take the integral of, 
+                    such as $e^{x^{2}}$.
+                </p>
+                <p>
+                    There are reasons these rules work, though, and 
+                    as you progress through mathematics you uncover 
+                    the reasons why.
+                </p>
+        </section>
+        <footer>
+            <hr>
+            <br>
+            Made by <a href="https://sahatjaldu.netlify.app/">Sahat Jaldu</a>
+        </footer>
+    </main>
+</body>
+</html>

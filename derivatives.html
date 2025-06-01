@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Derivatives</title>
+    <link rel="stylesheet" href="https://unpkg.com/normalize.css">
+    <link rel="stylesheet" href="https://unpkg.com/magick.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+        src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <style>
+        header {
+            text-align: center;
+            border: 7px double;
+            padding-bottom: 50px;
+        }
+        header h1 {
+            padding-bottom: 0;
+        }
+        #bar {
+            width: 300px;
+            margin: auto;
+            display: flex;
+            justify-content: space-around;
+            padding-top: 0;
+        }
+        img {
+            display: block;
+            margin: auto;
+            width: 75%;
+        }
+        .theorem {
+            border: 2px solid white;
+            border-radius: 10px;
+            padding: 7px;
+            margin: 20px auto;
+        }
+        .theorem h2 {
+            margin-top: 0;
+            font-size: 2rem;
+            font-family: 'Times New Roman', Times, serif;
+            text-transform: none;
+        }
+        @media only screen and (max-width: 500px) {
+            img {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <header>
+            <h1>Derivatives</h1>
+            <div id="bar">
+                <a href="index.html">home</a>
+                <a href="integrals.html">next --></a>
+            </div>
+        </header>
+        <section>
+            <h1>Background</h1>
+            <hr>
+            <p>Derivatives are just the idea of a slope, just at a single point instead of two.</p>
+            <p>When you were taught slope, you were taught that it was rise over run:</p>
+            <img id="derivatives1" src="/images/derivative1.png" alt="linear function">
+            <p>
+                We use this equation to calculate the slope:
+                $$
+                \frac{y_{2}-y_{1}}{x_{2}-x_{1}}
+                $$
+            </p>
+            <p>So, our slope is two. At any point on the graph, the slope will still be two.</p>
+            <p>However, what about for more complicated line, like this quadratic function?</p>
+            <img src="/images/derivative2.png" alt="quadratic function">
+            <p>The slope is constantly changing for this function. It wouldn't make sense to find the slope 
+                at a single point using our previous equation.</p>
+            <p>
+                What we can do, however, is bring our two points closer and closer together so 
+                that our calculated rate of change is more and more accurate. See how the line 
+                gets closer to a slope that better represents that part of the function as we bring 
+                the points closer together.
+            </p>
+            <img src="/images/derivative3.gif" alt="tangent line gif">
+            <p>A derivative is just the slope of two points brought so close together, that we can 
+                basically just say that they are at a single point. As a result, we can find the 
+                slope at one point, rather than two, making a more useful slope for non-linear 
+                functions.</p><br>
+            <h1>Defining a Derivative</h1>
+            <hr>
+            <p>Here's how it works:</p>
+            <p>
+                We define two point on a function $f(x)$, a $\text{Point 1}$ and 
+                $\text{Point 2}$. $\text{Point 1}$ has coordinates $(x_{1}, y_{1})$, 
+                and $\text{Point 2}$ has coordinates $(x_{2}, y_{2})$. This is the set 
+                up that we had before.
+            </p>
+            <p>
+                $$
+                \begin{matrix}
+                \text{Point 1}: & (x_{1}, y_{1}) \\
+                \text{Point 2}: & (x_{2}, y_{2})
+                \end{matrix}
+                $$
+            </p>
+            <p>The first thing we do is to replace $y$ with $f(x)$, so that 
+                changing $x$ automatically changes $y$ according to our defined function. 
+                So, our coordinates are now:</p>
+            <p>
+                $$
+                \begin{matrix}
+                \text{Point 1}: & (x_{1}, f(x_{1})) \\
+                \text{Point 2}: & (x_{2}, f(x_{2}))
+                \end{matrix}
+                $$
+            </p>
+            <p>The final thing we have to do is to bring the two points close together. We can do this by:</p>
+            <ol>
+                <li>defining an incredibly small distance $h$</li>
+                <li>saying that $x_{2}$ is an $h$ distance from $x_{1}$. In 
+                    other words, $x_{2}=x_{1}+h$</li>
+            </ol>
+            <p>So our coordinates are now:</p>
+            <p>
+                $$
+                \begin{matrix}
+                \text{Point 1}: & (x_{1}, f(x_{1})) \\
+                \text{Point 2}: & (x_{1} + h, f(x_{1} + h))
+                \end{matrix}
+                $$
+            </p>
+            <p>Since the only variable we are using is $x_{1}$, we can just write it 
+                as $x$. So, our coordinates are:</p>
+            <p>
+                $$
+                \begin{matrix}
+                \text{Point 1}: & (x, f(x)) \\
+                \text{Point 2}: & (x + h, f(x + h))
+                \end{matrix}
+                $$
+            </p>
+            <p>Now, we just plug these coordinates into our $y_{2} - y_{1} / x_{2} - x_{1}$</p>
+            <p>
+                $$
+                \frac{y_{2} - y_{1}}{x_{2} - x_{1}}=\frac{f(x + h) - 
+                    f(x)}{x + h - x} =\frac{f(x + h) - f(x)}{h}
+                $$
+            </p>
+            <p>Previously, we defined $h$ as just a really small change in $x$. We can actually 
+                define it in the equation itself using something called a limit:</p>
+            <p>
+                $$
+                \boxed{\lim_{ h \to 0 } \frac{f(x + h) - f(x)}{h}}
+                $$
+            </p>
+            <p>This just means that $h$ is extremely close to $0$, but is not equal to $0$.</p>
+            <p>This is the formal definition of a derivative. By plugging in an equation, we can 
+                get another equation that gives us the instantaneous slope at any $x$ value.</p>
+            <p>For example, for $f(x) = x^2$:</p>
+            <p>
+                $$
+                \begin{align}
+                &\lim_{ h \to 0 } \frac{(x+h)^2-x^2}{h}  \\
+                =&\lim_{ h \to 0 } \frac{x^2+2xh+h^2-x^2}{h} \\
+                =&\lim_{ h \to 0 } \frac{2xh-h^2}{h} \\
+                =&\lim_{ h \to 0 } \frac{2xh}{h} - \frac{h^2}{h} \\
+                =&\lim_{ h \to 0 } 2x-h \\
+                =&\ \boxed{2x}
+                \end{align}
+                $$
+            </p>
+            <p>When we plug in an $x$ value of 2, we get $2(2)=4$. The slope of $f(x)=x^2$ at $x=2$ 
+                is $4$. When we plug in an $x$ value of 10, we get $2(10)=20$. The slope of $f(x)=x^2$ 
+                at $x=10$ is $20$. And so on. You can see how useful this is for almost every field; 
+                Real life almost never follows constant rates of change.</p>
+            <p>Note that when we take the derivative of a linear function, we get a constant value. 
+                This is because the slope of a linear function is always the same:</p>
+            <p>
+                $$
+                \begin{align}
+                &\lim_{ h \to 0 } \frac{2(x+h)-2x}{h} \\
+                =&\lim_{ h \to 0 } \frac{2x+2h-2x}{h} \\
+                =&\lim_{ h \to 0 } \frac{2h}{h} \\
+                =&\lim_{ h \to 0 } 2 \\
+                =&\ \boxed{2}
+                \end{align}
+                $$
+            </p><br>
+            <h1>Other Notation</h1>
+            <hr>
+            <p>You may see a derivative represented as $\Large\frac{ dy }{ dx }$, 
+                where $dy$ is an incredibly small change in $y$, (our rise) and $dx$ 
+                is an incredibly small change in $x$ (our run).</p>
+            <p>For example, for $f(x)=y=x^2$</p>
+            <p>
+                $$
+                \frac{ dy }{ dx } =\frac{ d }{ dx } x^2=2x
+                $$
+            </p>
+            <p>and so on.</p>
+            <p>A second derivative, or a derivative of a derivative looks like:</p>
+            <p>
+                $$
+                \frac{ d^{2}y }{ dx^{2} } =\frac{ d^{2} }{ dx^{2} }  x^2=\frac{ dy }{ dx } 2x=2
+                $$
+            </p>
+            <p>You might also see derivatives as ticks, or primes.</p>
+            <p>
+                $$
+                \begin{align}
+                f(x)&=x^2 \\
+                f'(x)&=2x
+                \end{align}
+                $$
+            </p>
+            <p>You can keep adding ticks to create second, third, fourth, and so on derivatives:</p>
+            <p>
+                $$
+                \begin{align}
+                f(x)&=x^2 \\
+                f'(x)&=2x \\
+                f''(x)&=2
+                \end{align}
+                $$
+            </p><br>
+            <h1>Special Rules</h1>
+            <hr>
+            <p>After finding the derivatives of functions over and over again using the 
+                formal definition that we defined above, people began to discover shortcuts. 
+                For example,</p>
+            <div class="theorem">
+                <h2>The Power Rule</h2>
+                <p>$$\frac{d}{dx}x^n=nx^{(n-1)}$$</p>
+            </div>
+            <p>Using the example of $f(x)=x^3$:</p>
+            <p>
+                $$
+                \frac{d}{dx}x^3=3x^{3-1}=3x^2
+                $$
+            </p>
+            <p>So the derivative  of $x^3$ is $3x^2$</p>
+            <p>Another rule:</p>
+            <div class="theorem">
+                <h2>Sum and Difference Rule</h2>
+                <p>$$\frac{d}{dx}[f(x)+g(x)]=\frac{d}{dx}f(x)+\frac{d}{dx}g(x)$$</p>
+            </div>
+            <p>Using the example of $x^2 + 8x + 3$:</p>
+            <p>
+                $$
+                \begin{align}
+                &\ \frac{d}{dx}x^2 + 8x + 3 \\
+                =&\ \frac{d}{dx}x^2+\frac{d}{dx}8x + \frac{d}{dx} 3 \\
+                =&\ \boxed{2x+8}
+                \end{align}
+                $$
+            </p>
+            <p>So the derivative of $x^2+8x+3$ is $2x + 8$</p>
+            <p>There are many many more rules like this. I'm not going to go through 
+                them all, but a quick google search can get you more if you're interested.</p>
+            <p>Note that all of these rules also have mathematical and geometric proofs that 
+                clearly explain why they work — these don't come from sheer coincidence. 
+                I recommend watching 
+                <a href="https://youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr&si=_QKx83rtBAi4LVQ2"
+                target="_blank">
+                    3Blue1Brown's Calculus Series: Essence of Calculus</a> to learn how some of these 
+                    rules work.</p>
+        </section>
+        <footer>
+            <hr>
+            <br>
+            Made by <a href="https://sahatjaldu.netlify.app/">Sahat Jaldu</a>
+        </footer>
+    </main>
+</body>
+</html>
